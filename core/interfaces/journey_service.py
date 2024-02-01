@@ -6,5 +6,5 @@ class JourneyService(ABC):
         pass
 
     @abstractmethod
-    def sort_boarding_cards(self):
+    def get_journey(self):
         pass

@@ -25,9 +25,20 @@ class TestJourneyService(unittest.TestCase):
         self.service.add_boarding_card(self.card1)
         self.service.add_boarding_card(self.card4)
         self.service.add_boarding_card(self.card2)
-        self.service.sort_boarding_cards()
+        self.service._JourneyServiceImpl__sort_boarding_cards()
 
         self.assertEqual(self.service.boarding_cards[0].departure, "Madrid")
         self.assertEqual(self.service.boarding_cards[1].departure, "Barcelona")
         self.assertEqual(self.service.boarding_cards[2].departure, "Gerona Airport")
         self.assertEqual(self.service.boarding_cards[3].departure, "Stockholm")
+
+    def test_get_journey(self):
+        # Test the full journey description
+        self.service.add_boarding_card(self.card1)
+        self.service.add_boarding_card(self.card2)
+        self.service.add_boarding_card(self.card3)
+        self.service.add_boarding_card(self.card4)
+        description = self.service.get_journey()
+
+        self.assertIn("Take Train 78A from Madrid to Barcelona. Sit in seat 45B.", description)
+        self.assertIn("You have arrived at your final destination.", description)

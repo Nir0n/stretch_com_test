@@ -17,7 +17,7 @@ class JourneyServiceImpl(JourneyService):
         """
         self.boarding_cards.append(card)
 
-    def sort_boarding_cards(self):
+    def __sort_boarding_cards(self):
         """
         Sort the boarding cards in the order of the journey, from departure to destination.
         """
@@ -40,4 +40,17 @@ class JourneyServiceImpl(JourneyService):
             start = card.destination
 
         self.boarding_cards = sorted_cards
+
+    def get_journey(self) -> str:
+        """
+        Get the sorted journey.
+        :return: str
+        """
+        self.__sort_boarding_cards()
+        journey_description = []
+        for card in self.boarding_cards:
+            description = f"Take {card.transport} from {card.departure} to {card.destination}. Sit in seat {card.seat}."
+            journey_description.append(description)
+        journey_description.append("You have arrived at your final destination.")
+        return '\n'.join(journey_description)
 
