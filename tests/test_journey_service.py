@@ -1,5 +1,5 @@
 import unittest
-from core.interfaces import JourneyService
+from core.services.journey_service.journey_service_impl import JourneyServiceImpl as JourneyService # In tests we can use the implementation directly
 from core.models.boarding_card import BoardingCard
 
 
